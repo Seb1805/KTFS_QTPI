@@ -22,7 +22,6 @@ def fillSpace(x, y, color):
     col = (x-1)*3
     row = (y-1)*3
 
-
     sense.set_pixel(col, row, color) 
     sense.set_pixel(col + 1, row, color) 
     sense.set_pixel(col, row + 1, color) 
@@ -31,12 +30,17 @@ def fillSpace(x, y, color):
     sense.set_pixel(col + 1, row + 1, color) 
 
 
-sense.set_rotation(180)
+def checkSpace(x,y):
+    col = (x-1)*3
+    row = (y-1)*3
+    arg = first_list[row*8 + col]
+    if(arg == [0,0,0]):
+        return True
+    return False
 
 botCol = (0,0,128)
 humanCol = (128,0,0)
 blinkCol = (245,8,18)
-
 
 #Draw the main board
 drawMainBoard()
@@ -46,12 +50,6 @@ fillSpace(1,2,botCol)
 fillSpace(2,1,humanCol)
 fillSpace(3,1,humanCol)
 fillSpace(3,1,botCol)
-sense.set_pixel(3,7,botCol)
-#Corner 1 Example
-# sense.set_pixel(0,1,(255,0,0))
-# sense.set_pixel(1,0,(255,0,0))
-# sense.set_pixel(1,1,(255,0,0))
-# sense.set_pixel(0,0,(255,0,0))
 
 
 #Start in (2,2)
@@ -60,9 +58,10 @@ sense.set_pixel(3,7,botCol)
 turn = True
 curPosX = 2
 curPosY = 2
-while True:
+first_list = sense.get_pixels()
+while turn:
 
-
+    sense.set_pixels(first_list)
     fillSpace(curPosX,curPosY,blinkCol)
     time.sleep(0.1)
     fillSpace(curPosX,curPosY,(0,0,0))
@@ -79,9 +78,13 @@ while True:
                 if(curPosX > 1):
                     curPosX-=1
             elif event.direction == "up":
-                if(curPosY < 3):
-                    curPosY+=1
-            elif event.direction == "down":
                 if(curPosY > 1):
                     curPosY-=1
-
+            elif event.direction == "down":
+                if(curPosY < 3):
+                    curPosY+=1
+            elif event.direction == "middle":
+                if checkSpace(curPosX,curPosY):
+                    fillSpace(curPosX,curPosY,humanCol)
+                    first_list = sense.get_pixels()
+                    turn = False
