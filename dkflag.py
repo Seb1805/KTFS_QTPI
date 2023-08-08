@@ -108,3 +108,33 @@ while playing:
     while not player1:
 
         testPlayerFunction(botCol)
+
+
+def checkWin():
+    winList = sense.get_pixels()
+    pos1 = winList[0]
+    pos2 = winList[3]
+    pos3 = winList[6]
+    pos4 = winList[24]
+    pos5 = winList[27]
+    pos6 = winList[30]
+    pos7 = winList[48]
+    pos8 = winList[51]
+    pos9 = winList[54]
+    if(pos1 == pos2 == pos3):
+        return True
+    elif (pos3 == pos4 == pos5):
+        return True
+    elif (pos6 == pos7 == pos8):
+        return True
+    elif(pos1 == pos4 == pos7):
+        return True
+    elif (pos2 == pos5 == pos8):
+        return True
+    elif (pos3 == pos6 == pos9):
+        return True
+    elif (pos1 == pos5 == pos9):
+        return True
+    elif (pos3 == pos5 == pos7):
+        return True
+    return False
