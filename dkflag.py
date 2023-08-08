@@ -47,45 +47,59 @@ blinkCol = (245,8,18)
 drawMainBoard()
 
 
-#Start in (2,2)
 
+#Start in (2,2)
+first_list = sense.get_pixels()
 playing = True
 player1 = True
+curPosX = 2
+curPosY = 2
 
+
+def testPlayerFunction(playerColor):
+    global first_list 
+    global curPosX
+    global curPosY
+    global player1
+
+
+
+    sense.set_pixels(first_list)
+
+
+    fillSpace(curPosX,curPosY,playerColor)
+    time.sleep(0.1)
+    fillSpace(curPosX,curPosY,(0,0,0))
+    time.sleep(0.1)
+    #TODO: Set bool false when enter input detected
+
+    for event in sense.stick.get_events():
+        if event.action == 'pressed':
+            print(event.direction)
+            if event.direction == "right":
+                if(curPosX < 3):
+                    curPosX+=1
+            elif event.direction == "left":
+                if(curPosX > 1):
+                    curPosX-=1
+            elif event.direction == "up":
+                if(curPosY > 1):
+                    curPosY-=1
+            elif event.direction == "down":
+                if(curPosY < 3):
+                    curPosY+=1
+            elif event.direction == "middle":
+                if checkSpace(curPosX,curPosY):
+                    fillSpace(curPosX,curPosY,playerColor)
+                    first_list = sense.get_pixels()
+                    player1 = not player1
 
 while playing:
     curPosX = 2
     curPosY = 2
     first_list = sense.get_pixels()
     while player1:
-
-        sense.set_pixels(first_list)
-        fillSpace(curPosX,curPosY,blinkCol)
-        time.sleep(0.1)
-        fillSpace(curPosX,curPosY,(0,0,0))
-        time.sleep(0.1)
-        #TODO: Set bool false when enter input detected
-
-        for event in sense.stick.get_events():
-            if event.action == 'pressed':
-                print(event.direction)
-                if event.direction == "right":
-                    if(curPosX < 3):
-                        curPosX+=1
-                elif event.direction == "left":
-                    if(curPosX > 1):
-                        curPosX-=1
-                elif event.direction == "up":
-                    if(curPosY > 1):
-                        curPosY-=1
-                elif event.direction == "down":
-                    if(curPosY < 3):
-                        curPosY+=1
-                elif event.direction == "middle":
-                    if checkSpace(curPosX,curPosY):
-                        fillSpace(curPosX,curPosY,humanCol)
-                        first_list = sense.get_pixels()
-                        player1 = not player1
+        testPlayerFunction(humanCol)
     
     curPosX = 2
     curPosY = 2
@@ -93,34 +107,4 @@ while playing:
 
     while not player1:
 
-
-        sense.set_pixels(first_list)
- 
-
-        fillSpace(curPosX,curPosY,botCol)
-        time.sleep(0.1)
-        fillSpace(curPosX,curPosY,(0,0,0))
-        time.sleep(0.1)
-        #TODO: Set bool false when enter input detected
-
-        for event in sense.stick.get_events():
-            if event.action == 'pressed':
-                print(event.direction)
-                if event.direction == "right":
-                    if(curPosX < 3):
-                        curPosX+=1
-                elif event.direction == "left":
-                    if(curPosX > 1):
-                        curPosX-=1
-                elif event.direction == "up":
-                    if(curPosY > 1):
-                        curPosY-=1
-                elif event.direction == "down":
-                    if(curPosY < 3):
-                        curPosY+=1
-                elif event.direction == "middle":
-                    if checkSpace(curPosX,curPosY):
-                        fillSpace(curPosX,curPosY,botCol)
-                        first_list = sense.get_pixels()
-                        player1 = not player1
-    
+        testPlayerFunction(botCol)
