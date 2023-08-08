@@ -27,7 +27,12 @@ def fillSpace(x, y, color):
     sense.set_pixel(col, row + 1, color) 
     sense.set_pixel(col, row + 1, color) 
     sense.set_pixel(col, row + 1, color) 
+
     sense.set_pixel(col + 1, row + 1, color) 
+
+
+
+
 
 
 def checkSpace(x,y):
@@ -110,8 +115,15 @@ def checkWin():
     print(pos2)
 
 
+
+
+ 
     if(pos1 == pos2 and pos2 == pos3 and pos1 != [0,0,0]):
-        print("Skrald")
+
+
+
+
+
         return True
     elif (pos4 == pos5 and pos5 == pos6 and pos4 != [0,0,0]):
         return True
@@ -136,7 +148,7 @@ def checkWin():
     
     return False
 
-
+winner = [0,0,0]
 while playing:
     curPosX = 2
     curPosY = 2
@@ -149,6 +161,7 @@ while playing:
 
 
     if playing != True:
+        winner = humanCol
         break
 
     curPosX = 2
@@ -160,7 +173,19 @@ while playing:
         testPlayerFunction(botCol)
         playing = not checkWin()
 
-
+    if playing != True:
+        winner = botCol
+        break
     
-sense.set_pixel(1,1,(0,128,0))
+
+
+
+
+
+
+
+
+
+#Display win color!
+sense.clear(winner)
 
