@@ -19,26 +19,34 @@ def drawMainBoard():
 
 def fillSpace(x, y, color):
 
-    row = (x-1)*3
-    col = (y-1)*3
+    col = (x-1)*3
+    row = (y-1)*3
 
 
-    sense.set_pixel(row, col, color) 
-    sense.set_pixel(row + 1, col, color) 
-    sense.set_pixel(row, col + 1, color) 
-    sense.set_pixel(row + 1, col + 1, color) 
+    sense.set_pixel(col, row, color) 
+    sense.set_pixel(col + 1, row, color) 
+    sense.set_pixel(col, row + 1, color) 
+    sense.set_pixel(col, row + 1, color) 
+    sense.set_pixel(col, row + 1, color) 
+    sense.set_pixel(col + 1, row + 1, color) 
 
 
+sense.set_rotation(180)
 
-
-
+botCol = (0,0,128)
+humanCol = (128,0,0)
+blinkCol = (245,8,18)
 
 
 #Draw the main board
 drawMainBoard()
 
-fillSpace(1,1,(128,0,0))
-
+fillSpace(1,1,humanCol)
+fillSpace(1,2,botCol)
+fillSpace(2,1,humanCol)
+fillSpace(3,1,humanCol)
+fillSpace(3,1,botCol)
+sense.set_pixel(3,7,botCol)
 #Corner 1 Example
 # sense.set_pixel(0,1,(255,0,0))
 # sense.set_pixel(1,0,(255,0,0))
@@ -46,4 +54,25 @@ fillSpace(1,1,(128,0,0))
 # sense.set_pixel(0,0,(255,0,0))
 
 
+#Start in (2,2)
+
+
+turn = True
+curPosX = 2
+curPosY = 2
+while True:
+
+
+    fillSpace(curPosX,curPosY,blinkCol)
+    time.sleep(0.1)
+    fillSpace(curPosX,curPosY,(0,0,0))
+    time.sleep(0.1)
+    #TODO: Set bool false when enter input detected
+
+    for event in sense.stick.get_events():
+        if event.action == 'pressed':
+            print(event.direction)
+            if event.direction == "right":
+                if(curPosX < 3):
+                    curPosX+=1
 
