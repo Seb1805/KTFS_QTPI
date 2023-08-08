@@ -75,4 +75,13 @@ while True:
             if event.direction == "right":
                 if(curPosX < 3):
                     curPosX+=1
+            else if event.direction == "left":
+                if(curPosX > 1):
+                    curPosX-=1
+            else if event.direction == "up":
+                if(curPosY < 3):
+                    curPosY+=1
+            else if event.direction == "down":
+                if(curPosY > 1):
+                    curPosY-=1
 
