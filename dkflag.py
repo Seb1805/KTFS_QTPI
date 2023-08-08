@@ -94,24 +94,9 @@ def testPlayerFunction(playerColor):
                     first_list = sense.get_pixels()
                     player1 = not player1
 
-while playing:
-    curPosX = 2
-    curPosY = 2
-    first_list = sense.get_pixels()
-    while player1:
-        testPlayerFunction(humanCol)
-    
-    curPosX = 2
-    curPosY = 2
-    first_list = sense.get_pixels()
-
-    while not player1:
-
-        testPlayerFunction(botCol)
-
-
 def checkWin():
     winList = sense.get_pixels()
+    print(winList)
     pos1 = winList[0]
     pos2 = winList[3]
     pos3 = winList[6]
@@ -121,20 +106,61 @@ def checkWin():
     pos7 = winList[48]
     pos8 = winList[51]
     pos9 = winList[54]
-    if(pos1 == pos2 == pos3):
+    print(pos1)
+    print(pos2)
+
+
+    if(pos1 == pos2 and pos2 == pos3 and pos1 != [0,0,0]):
+        print("Skrald")
         return True
-    elif (pos3 == pos4 == pos5):
+    elif (pos4 == pos5 and pos5 == pos6 and pos4 != [0,0,0]):
         return True
-    elif (pos6 == pos7 == pos8):
+    elif (pos7 == pos8 and pos8 == pos9 and pos7 != [0,0,0]):
         return True
-    elif(pos1 == pos4 == pos7):
+    elif(pos1 == pos4 and pos4 == pos7 and pos1 != [0,0,0]):
         return True
-    elif (pos2 == pos5 == pos8):
+    
+
+
+
+ 
+
+    elif (pos2 == pos5 and pos5 == pos8 and pos2 != [0,0,0]):
         return True
-    elif (pos3 == pos6 == pos9):
+    elif (pos3 == pos6 and pos6 == pos9 and pos3 != [0,0,0]):
         return True
-    elif (pos1 == pos5 == pos9):
+    elif (pos1 == pos5 and pos5 == pos9 and pos1 != [0,0,0]):
         return True
-    elif (pos3 == pos5 == pos7):
+    elif (pos3 == pos5 and pos5 == pos7 and pos3 != [0,0,0]):
         return True
+    
     return False
+
+
+while playing:
+    curPosX = 2
+    curPosY = 2
+    first_list = sense.get_pixels()
+    while player1:
+        testPlayerFunction(humanCol)
+
+
+        playing = not checkWin()
+
+
+    if playing != True:
+        break
+
+    curPosX = 2
+    curPosY = 2
+    first_list = sense.get_pixels()
+
+    while not player1:
+
+        testPlayerFunction(botCol)
+        playing = not checkWin()
+
+
+    
+sense.set_pixel(1,1,(0,128,0))
+
