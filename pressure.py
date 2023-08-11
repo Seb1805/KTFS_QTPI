@@ -5,4 +5,5 @@ pressure = sense.get_pressure()
 print("Pressure: %s Millibars" % pressure)
 
 # alternatives
-print(sense.pressure)
+while True:
+    print(sense.pressure)

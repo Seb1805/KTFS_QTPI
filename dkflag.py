@@ -13,10 +13,6 @@ def drawMainBoard():
 
     os.sep,"/home","ktfs/SenseHAT","4.png")                                                                                                                                                                                                                        
 
-
-
-
-
     img = Image.open(image_file)
 
     sense.load_image(image_file)
@@ -36,11 +32,6 @@ def fillSpace(x, y, color):
     sense.set_pixel(col, row + 1, color) 
 
     sense.set_pixel(col + 1, row + 1, color) 
-
-
-
-
-
 
 def checkSpace(x,y):
     col = (x-1)*3
@@ -120,16 +111,8 @@ def checkWin():
     pos9 = winList[54]
     print(pos1)
     print(pos2)
-
-
-
-
  
     if(pos1 == pos2 and pos2 == pos3 and pos1 != [0,0,0]):
-
-
-
-
 
         return True
     elif (pos4 == pos5 and pos5 == pos6 and pos4 != [0,0,0]):
@@ -138,12 +121,6 @@ def checkWin():
         return True
     elif(pos1 == pos4 and pos4 == pos7 and pos1 != [0,0,0]):
         return True
-    
-
-
-
- 
-
     elif (pos2 == pos5 and pos5 == pos8 and pos2 != [0,0,0]):
         return True
     elif (pos3 == pos6 and pos6 == pos9 and pos3 != [0,0,0]):
@@ -183,26 +160,8 @@ while playing:
     if playing != True:
         winner = botCol
         break
-    
-
-
-
-
-
-
-
-
 
 #Display win color!
-
-
-
-
-
-
-
-
-
 
 winCol = winner
 white = [180,180,180]

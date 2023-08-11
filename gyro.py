@@ -10,10 +10,6 @@ sense = SenseHat()
 #     print(sense.compass_raw)
 # alternatives
 
-
-
-
-
 sense = SenseHat()
 raw = sense.get_gyroscope_raw()
 print("x: {x}, y: {y}, z: {z}".format(**raw))
