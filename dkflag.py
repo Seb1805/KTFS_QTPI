@@ -187,5 +187,40 @@ while playing:
 
 
 #Display win color!
-sense.clear(winner)
+
+
+
+
+
+
+
+
+
+
+winCol = winner
+white = [180,180,180]
+wArr = ['W','I','N','N','E','R']
+for x in wArr:
+    sense.show_letter(
+       
+        x ,white,      winCol)
+    time.sleep(0.5)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
