@@ -13,6 +13,7 @@ while True:
     sense = SenseHat()
     raw = sense.get_gyroscope_raw()
     strIns = f'{raw["x"]},{raw["y"]},{raw["z"]}'
+    # print(strIns)
     db.insertData('Gyroscope','X,Y,Z',strIns)
 
 

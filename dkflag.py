@@ -172,6 +172,10 @@ for x in wArr:
     time.sleep(0.5)
 
 
+time.sleep(5)
+sense.set_pixels()
+
+
 
 
 
