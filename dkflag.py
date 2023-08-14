@@ -15,6 +15,11 @@ def drawMainBoard():
     img = Image.open(image_file)
 
     sense.load_image(image_file)
+
+
+
+
+
     rgb_img = img.convert('RGB')
     # Generate rgb values for image pixels
     image_pixels = list(rgb_img.getdata())
@@ -77,7 +82,6 @@ def testPlayerFunction(playerColor):
 
     for event in sense.stick.get_events():
         if event.action == 'pressed':
-            print(event.direction)
             if event.direction == "right":
                 if(curPosX < 3):
                     curPosX+=1
@@ -98,7 +102,6 @@ def testPlayerFunction(playerColor):
 
 def checkWin():
     winList = sense.get_pixels()
-    print(winList)
     pos1 = winList[0]
     pos2 = winList[3]
     pos3 = winList[6]
@@ -108,8 +111,6 @@ def checkWin():
     pos7 = winList[48]
     pos8 = winList[51]
     pos9 = winList[54]
-    print(pos1)
-    print(pos2)
  
     if(pos1 == pos2 and pos2 == pos3 and pos1 != [0,0,0]):
 
@@ -166,30 +167,9 @@ winCol = winner
 white = [180,180,180]
 wArr = ['W','I','N','N','E','R']
 for x in wArr:
-    sense.show_letter(
-       
-        x ,white,      winCol)
+    sense.show_letter(x ,white,winCol)
     time.sleep(0.5)
 
 
 time.sleep(5)
-sense.set_pixels()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+sense.clear(0,0,0)
