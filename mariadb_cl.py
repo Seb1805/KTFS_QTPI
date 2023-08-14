@@ -6,7 +6,7 @@ def insertData(table,cols,values):
         user="pyUser",
         password="password",
         host="localhost",
-        database="Skrald")
+        database="SensorData")
     cur = conn.cursor() 
 
         

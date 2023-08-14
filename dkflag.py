@@ -8,7 +8,6 @@ sense = SenseHat()
 
 def drawMainBoard():
     # Open image file
-
     image_file = os.path.join(
 
     os.sep,"/home","ktfs/SenseHAT","4.png")                                                                                                                                                                                                                        

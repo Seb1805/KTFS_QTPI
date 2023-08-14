@@ -5,4 +5,5 @@ north = sense.get_compass()
 print("North: %s" % north)
 
 # alternatives
-print(sense.compass)
+while True:
+    print(sense.compass)

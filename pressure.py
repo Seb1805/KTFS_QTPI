@@ -6,4 +6,5 @@ print("Pressure: %s Millibars" % pressure)
 
 # alternatives
 while True:
+    print("Pressure: %s Millibars" % pressure)
     print(sense.pressure)
