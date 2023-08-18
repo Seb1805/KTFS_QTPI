@@ -1,5 +1,6 @@
 from sense_hat import SenseHat
-import mariadb_cl as db
+import CanWriteToDb.mariadb_cl as db
+import time
 
 
 sense = SenseHat()
@@ -12,5 +13,6 @@ while True:
     # print("Pressure: %s Millibars" % pressure)
     # print(sense.pressure)
     db.insertData('Pressure','PressureInHectoPascal', pressure)
+    time.sleep(5)
 
 

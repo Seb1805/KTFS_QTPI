@@ -1,5 +1,5 @@
 from sense_hat import SenseHat
-import mariadb_cl as db
+import CanWriteToDb.mariadb_cl as db
 
 sense = SenseHat()
 accel_only = sense.get_accelerometer()

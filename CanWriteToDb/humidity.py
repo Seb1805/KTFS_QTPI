@@ -1,8 +1,8 @@
 from sense_hat import SenseHat
-
+import time
 
 #import
-import mariadb_cl as db
+import CanWriteToDb.mariadb_cl as db
 
 sense = SenseHat()
 humidity = sense.get_humidity()
@@ -13,3 +13,4 @@ humidity = sense.get_humidity()
 while True:
     humidity = sense.get_humidity()
     db.insertData('Humidity','Humidity',humidity)
+    time.sleep(5)
