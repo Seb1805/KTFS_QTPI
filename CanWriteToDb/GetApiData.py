@@ -1,5 +1,4 @@
-from sense_hat import SenseHat
-import mariadb_cl as db
+
 import requests #used to make api call
 import json #json lib
 import time
