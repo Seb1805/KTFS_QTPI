@@ -7,7 +7,14 @@ import os
 from dotenv import load_dotenv as denv
 
 denv()
-
+# This file contains functions for collecting and posting sensor data from the Sense HAT to an API.
+# It uses the sense_hat, requests, json, time, gc, os, and dotenv libraries.
+# The BASE_ADDRESS variable is the base URL of the API, which is read from environment variables using the dotenv library.
+# The sense variable is an instance of the SenseHat class, which is used to read sensor data.
+# The PostSensorData function is used to post sensor data to the API, and takes three arguments:
+#   - path_api: the path of the API endpoint to post to
+#   - get_data_func: a function that returns a dictionary of sensor data
+#   - format_json_func: a function that takes a dictionary of sensor data and formats it as JSON
 #Base address of API
 BASE_ADDRESS = f'http://{os.getenv("SERVER_IP")}:{os.getenv("PORT")}'
 
