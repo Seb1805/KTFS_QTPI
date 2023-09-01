@@ -1,10 +1,9 @@
+#Imports
 import argparse
 import sys
 import time
-
 import cv2
 from timeit import time
-
 from picamera2 import Picamera2, Preview
 from matplotlib import pyplot as plt
 
