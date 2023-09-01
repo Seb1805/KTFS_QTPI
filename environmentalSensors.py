@@ -2,9 +2,14 @@ from sense_hat import SenseHat
 import requests 
 import json
 import time
+import gc
+import os
+from dotenv import load_dotenv as denv
+
+denv()
 
 #Base address of API
-BASE_ADDRESS = 'http://192.168.3.213:5000'
+BASE_ADDRESS = f'http://{os.getenv("SERVER_IP")}:{os.getenv("PORT")}'
 
 sense = SenseHat()
 
@@ -31,8 +36,12 @@ def PostSensorData(path_api, get_data_func , format_json_func):
     #Convert the string to a JSON object
     json_object = json.loads(json_str)
     #Send the post request to the API
-    requests.post(f'{BASE_ADDRESS}/{path_api}',json = json_object)
-
+    try:
+        requests.post(f'{BASE_ADDRESS}/{path_api}',json = json_object)
+    except requests.exceptions.ConnectionError:
+        print('connection failed')
+    # requests.post(f'{BASE_ADDRESS}/{path_api}',json = json_object)
+    #print('APIet kører ikke, KLAPHAT')
 
 #Loop that calls the various sensors
 while True:
@@ -40,10 +49,11 @@ while True:
     PostSensorData('Temperature', sense.get_temperature, lambda data : '{"Temperature" :' + str(data) + '}')
     PostSensorData('Pressure', sense.get_pressure, lambda data : '{"PressureInHectoPascal" :' + str(data) + '}')
     PostSensorData('Humidity', sense.get_humidity, lambda data : '{"Humidity" :' + str(data) + '}')
-    time.sleep(10)
     #IMU DegreesToNorth
     PostSensorData('Accelerometer',sense.get_accelerometer, lambda data : '{"Pitch" :' + str(data["pitch"]) + ', "Roll" :' + str(data["roll"]) + ', "Yaw" :' + str(data["yaw"]) + '}')
     PostSensorData('Compass',sense.get_compass, lambda data : '{"DegreesToNorth" :' + str(data) + '}')
-    #PostSensorData('Accelerometer',sense.get_accelerometer, lambda data : '{"Pitch" :' + str(data["pitch"]) + ', "Roll" :' + str(data["roll"]) + ', "Yaw" :' + str(data["yaw"]) + '}')
-    #PostSensorData('Accelerometer',sense.get_accelerometer, lambda data : '{"Pitch" :' + str(data["pitch"]) + ', "Roll" :' + str(data["roll"]) + ', "Yaw" :' + str(data["yaw"]) + '}')
+    PostSensorData('Orientation',sense.get_orientation, lambda data : '{"Pitch" :' + str(data["pitch"]) + ', "Roll" :' + str(data["roll"]) + ', "Yaw" :' + str(data["yaw"]) + '}')
+    PostSensorData('Gyroscope',sense.get_gyroscope_raw, lambda data : '{"X" :' + str(data["x"]) + ', "Y" :' + str(data["y"]) + ', "Z" :' + str(data["z"]) + '}')
+    gc.collect()
+    time.sleep(60)
 
