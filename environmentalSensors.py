@@ -56,11 +56,12 @@ while True:
     PostSensorData('Temperature', sense.get_temperature, lambda data : '{"Temperature" :' + str(data) + '}')
     PostSensorData('Pressure', sense.get_pressure, lambda data : '{"PressureInHectoPascal" :' + str(data) + '}')
     PostSensorData('Humidity', sense.get_humidity, lambda data : '{"Humidity" :' + str(data) + '}')
-    #IMU DegreesToNorth
+    #IMU 
     PostSensorData('Accelerometer',sense.get_accelerometer, lambda data : '{"Pitch" :' + str(data["pitch"]) + ', "Roll" :' + str(data["roll"]) + ', "Yaw" :' + str(data["yaw"]) + '}')
     PostSensorData('Compass',sense.get_compass, lambda data : '{"DegreesToNorth" :' + str(data) + '}')
     PostSensorData('Orientation',sense.get_orientation, lambda data : '{"Pitch" :' + str(data["pitch"]) + ', "Roll" :' + str(data["roll"]) + ', "Yaw" :' + str(data["yaw"]) + '}')
     PostSensorData('Gyroscope',sense.get_gyroscope_raw, lambda data : '{"X" :' + str(data["x"]) + ', "Y" :' + str(data["y"]) + ', "Z" :' + str(data["z"]) + '}')
+    # collect garbage and sleep for a minute
     gc.collect()
     time.sleep(60)
 
